@@ -67,18 +67,21 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: fadeInUp 1s ease forwards;
+  animation: myAnim 2s ease 0s 1 normal forwards;
   transform: translateY(20px);
-  opacity: 0;
+  opacity: 1;
   max-width: 60vw;
   font-size: 1.5vw;
 }
 
-@keyframes fadeInUp {
-  to {
-      transform: translateY(0);
-      opacity: 1;
-  }
+@keyframes myAnim {
+	0% {
+		transform: scaleX(0);
+	}
+
+	100% {
+		transform: scaleX(1);
+	}
 }
 
 #profile-pic {
@@ -89,9 +92,6 @@ body, html {
   transition: transform 0.5s ease;
 }
 
-#profile-pic:hover {
-  transform: scale(1.05);
-}
 
 #username {
   font-size: 2vw;
