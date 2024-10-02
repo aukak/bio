@@ -89,7 +89,7 @@ body, html {
 
 #username {
   font-size: 2vw;
-  background: linear-gradient(45deg,  light pink, pink);
+  background: linear-gradient(45deg,  blue, pink);
   background-size: 400%;
   -webkit-background-clip: text;
   color: transparent;
