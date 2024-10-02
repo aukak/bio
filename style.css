@@ -61,7 +61,7 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: myAnim 2s ease 0s 1 normal forwards;
+  animation: myAnim 2s ease 0s 1 alternate both;
   transform: translateY(20px);
   opacity: 1;
   max-width: 60vw;
@@ -70,13 +70,47 @@ body, html {
 
 @keyframes myAnim {
 	0% {
-		transform: scaleX(0);
+		animation-timing-function: ease-in;
+		opacity: 0;
+		transform: translateY(-250px);
+	}
+
+	38% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	55% {
+		animation-timing-function: ease-in;
+		transform: translateY(-65px);
+	}
+
+	72% {
+		animation-timing-function: ease-out;
+		transform: translateY(0);
+	}
+
+	81% {
+		animation-timing-function: ease-in;
+		transform: translateY(-28px);
+	}
+
+	90% {
+		animation-timing-function: ease-out;
+		transform: translateY(0);
+	}
+
+	95% {
+		animation-timing-function: ease-in;
+		transform: translateY(-8px);
 	}
 
 	100% {
-		transform: scaleX(1);
+		animation-timing-function: ease-out;
+		transform: translateY(0);
 	}
-}
+
 
 #profile-pic {
   border-radius: 50%;
