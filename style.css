@@ -55,7 +55,7 @@ body, html {
 .profile-box {
   border-color: white;
   border: 2px solid;
-  background-color: rgba(28, 28, 28, 0.4);
+  background-color: rgba(28, 28, 28, 1);
   padding: 10px;
   border-radius: 10px;
   display: flex;
