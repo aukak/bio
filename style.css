@@ -135,7 +135,7 @@ body, html {
   margin-top: 10px;
   width: 20vw;
   -webkit-appearance: none;
-  background: black;
+  background: gray;
   height: 10px;
   outline: none;
 }
