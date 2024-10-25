@@ -37,7 +37,10 @@
                 <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
                 <label for="volume-control" class="volume-label">sound</label>
             </div>
-            <button id="change-song-btn">Change Song</button>
+            <div class="audio-player">
+                <div class="song-title" id="song-title">Current Song: bg.mp3</div>
+                <button id="change-song-btn">Change Song</button>
+            </div>
         </div>
         <audio id="bg-music" src="bg.mp3" loop></audio>
     </div>
@@ -49,13 +52,15 @@
             const bgMusic = document.getElementById('bg-music');
             const volumeControl = document.getElementById('volume-control');
             const changeSongBtn = document.getElementById('change-song-btn');
+            const songTitle = document.getElementById('song-title');
 
-            const songs = ['bg.mp3', 'bg2.mp3', 'bg3.mp3', 'bg4.mp3'];
+            const songs = ['bg.mp3', 'bg2.mp3', 'bg3.mp3', 'bg3.mp3', 'bg4.mp3'];
             let currentSongIndex = 0;
 
             function changeSong() {
                 currentSongIndex = (currentSongIndex + 1) % songs.length;
                 bgMusic.src = songs[currentSongIndex];
+                songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
                 bgMusic.play();
             }
 
