@@ -154,6 +154,19 @@ html, body {
   font-size: 1vw;
 }
 
+.audio-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.song-title {
+  font-size: 1.5vw;
+  color: white;
+  margin-bottom: 10px;
+}
+
 #change-song-btn {
   margin-top: 10px;
   padding: 10px 20px;
