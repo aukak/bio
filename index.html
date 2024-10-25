@@ -25,7 +25,7 @@
             <p id="p1">stuff</p>
             <div class="links">
                 <a href="https://play.learnscience.site" class="link">Learn Sci</a>
-                 <a href="https://sites.google.com/view/learn-sci" class="link">Learn Sci GSITE</a>
+                <a href="https://sites.google.com/view/learn-sci" class="link">Learn Sci GSITE</a>
                 <a href="https://high.learnscience.site" class="link">high</a>
             </div> <br>
             <p id="p1">my socials</p>
@@ -37,8 +37,8 @@
                 <input type="range" id="volume-control" min="0" max="1" step="0.01" value="1">
                 <label for="volume-control" class="volume-label">sound</label>
             </div>
+            <button id="change-song-btn">Change Song</button>
         </div>
-
         <audio id="bg-music" src="bg.mp3" loop></audio>
     </div>
 
@@ -48,6 +48,16 @@
             const content = document.querySelector('.content');
             const bgMusic = document.getElementById('bg-music');
             const volumeControl = document.getElementById('volume-control');
+            const changeSongBtn = document.getElementById('change-song-btn');
+
+            const songs = ['bg.mp3', 'song2.mp3', 'song3.mp3'];
+            let currentSongIndex = 0;
+
+            function changeSong() {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                bgMusic.src = songs[currentSongIndex];
+                bgMusic.play();
+            }
 
             overlay.addEventListener('click', () => {
                 overlay.style.opacity = '0';
@@ -57,9 +67,12 @@
                     bgMusic.play();
                 }, 1000);
             });
+
             volumeControl.addEventListener('input', (e) => {
                 bgMusic.volume = e.target.value;
             });
+
+            changeSongBtn.addEventListener('click', changeSong);
         });
     </script>
 </body>
