@@ -100,17 +100,25 @@ html, body {
 
 #username {
   font-size: 2vw;
-  background: linear-gradient(45deg, red, green, blue, pink);
-  background-size: 400%;
+  background: linear-gradient(120deg, #b8b8b8, #e6e6e6, #b8b8b8, #5c5c5c, #e6e6e6);
+  background-size: 300%;
   -webkit-background-clip: text;
   color: transparent;
-  animation: rainbow 3s linear infinite;
+  animation: metallicShimmer 6s ease-in-out infinite, glow 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+               0 0 20px rgba(255, 255, 255, 0.6), 
+               0 0 30px rgba(255, 255, 255, 0.4);
 }
 
-@keyframes rainbow {
+@keyframes metallicShimmer {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4); }
+  50% { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6); }
 }
 
 .links {
