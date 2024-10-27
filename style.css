@@ -144,7 +144,7 @@ html, body {
   transform: scale(1.05);
 }
 
-##volume-control {
+#volume-control {
   -webkit-appearance: none;
   width: 20vw;
   height: 12px;
