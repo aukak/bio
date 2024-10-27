@@ -87,7 +87,7 @@ html, body {
 }
 
 #profile-pic:hover {
-  animation: spin 0.3s linear infinite;
+  animation: spin 3s linear infinite;
 }
 @keyframes spin {
   from {
