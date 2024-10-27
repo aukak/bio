@@ -40,6 +40,8 @@
             <div class="audio-player">
                 <div class="song-title" id="song-title">Current Song: none</div>
                 <button id="change-song-btn">Change Song</button>
+                 <div class="progress-note">Progress Slider</div>
+                <input type="range" id="progress-bar" value="0" step="0.1">
             </div>
         </div>
         <audio id="bg-music" src="bg.mp3" loop></audio>
@@ -53,8 +55,9 @@
             const volumeControl = document.getElementById('volume-control');
             const changeSongBtn = document.getElementById('change-song-btn');
             const songTitle = document.getElementById('song-title');
+            const progressBar = document.getElementById('progress-bar');
 
-            const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3',];
+            const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3'];
             let currentSongIndex = 0;
 
             function changeSong() {
@@ -62,6 +65,7 @@
                 bgMusic.src = songs[currentSongIndex];
                 songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
                 bgMusic.play();
+                updateProgressBar();
             }
 
             overlay.addEventListener('click', () => {
@@ -78,6 +82,18 @@
             });
 
             changeSongBtn.addEventListener('click', changeSong);
+
+            bgMusic.addEventListener('timeupdate', updateProgressBar);
+
+            progressBar.addEventListener('input', (e) => {
+                const newTime = (e.target.value / 100) * bgMusic.duration;
+                bgMusic.currentTime = newTime;
+            });
+
+            function updateProgressBar() {
+                const progressPercent = (bgMusic.currentTime / bgMusic.duration) * 100;
+                progressBar.value = progressPercent || 0;
+            }
         });
     </script>
 </body>
