@@ -76,18 +76,10 @@ html, body {
     transform: scale(1);
   }
 }
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 #profile-pic {
   border-radius: 50%;
-  border: 2px solid white;
+  border: 5px solid white;
   width: 10vw;
   height: 10vw;
   margin-bottom: 5px;
@@ -97,7 +89,14 @@ html, body {
 #profile-pic:hover {
   animation: spin 1s linear infinite;
 }
-
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 #username {
   font-size: 2vw;
