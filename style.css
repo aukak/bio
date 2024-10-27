@@ -146,6 +146,7 @@ html, body {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
+
 #volume-control {
   -webkit-appearance: none;
   width: 20vw;
@@ -233,7 +234,55 @@ html, body {
   transform: scale(1.05);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
+.progress-note {
+    color: white;
+    font-size: 2vw;
+    margin: 5px 0;
+}
 
+
+#progress-bar {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 12px;
+  background: linear-gradient(90deg, #4d4d4d, #bfbfbf);
+  border-radius: 10px;
+  outline: none;
+  margin: 10px 0;
+}
+
+#progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border: 2px solid #bfbfbf;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
+}
+
+#progress-bar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
+}
+
+#progress-bar::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #ffffff;
+  border: 2px solid #bfbfbf;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
+}
+
+#progress-bar::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
+}
 
 @media (max-width: 768px) {
   #overlay {
@@ -263,5 +312,9 @@ html, body {
 
   #volume-control {
     width: 30vw;
+  }
+
+  #progress-bar {
+    width: 90%; 
   }
 }
