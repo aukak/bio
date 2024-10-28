@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>banana</title>
     <link rel="icon" type="image/png" href="image.png"/>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -56,6 +55,8 @@
             const changeSongBtn = document.getElementById('change-song-btn');
             const songTitle = document.getElementById('song-title');
             const progressBar = document.getElementById('progress-bar');
+            const profilePic = document.getElementById('profile-pic');
+            const username = document.getElementById('username');
 
             const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3'];
             let currentSongIndex = 0;
@@ -66,6 +67,14 @@
                 songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
                 bgMusic.play();
                 updateProgressBar();
+
+                if (songs[currentSongIndex] === 'needmenow.mp3') {
+                    profilePic.src = 'szvypfp.png';
+                    username.textContent = 'szvy';
+                } else {
+                    profilePic.src = 'pfp.png';
+                    username.textContent = 'bog';
+                }
             }
 
             overlay.addEventListener('click', () => {
