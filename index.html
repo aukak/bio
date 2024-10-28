@@ -61,20 +61,22 @@
             let currentSongIndex = 0;
 
             function changeSong() {
-                currentSongIndex = (currentSongIndex + 1) % songs.length;
-                bgMusic.src = songs[currentSongIndex];
-                songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            bgMusic.src = songs[currentSongIndex];
+            songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
                 bgMusic.play();
                 updateProgressBar();
 
-                if (songs[currentSongIndex] === 'needmenow.mp3') {
-                    profilePic.src = 'szvypfp.png';
-                    username.textContent = 'szvy';
-                } else {
-                    profilePic.src = 'pfp.png';
-                    username.textContent = 'bog';
-                }
+                    if (songs[currentSongIndex] === 'needmenow.mp3') {
+                            console.log("Changing to needmenow.mp3");
+                        profilePic.src = 'szvypfp.png';
+                        username.textContent = 'szvy';
+                                                } else {
+                            profilePic.src = 'pfp.png';
+                                username.textContent = 'bog';
+                            }
             }
+
 
             const savedVolume = localStorage.getItem('bgMusicVolume');
             if (savedVolume !== null) {
