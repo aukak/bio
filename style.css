@@ -87,15 +87,7 @@ html, body {
 }
 
 #profile-pic:hover {
-  animation: spin 3s linear infinite;
-}
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  transform: scale(1.1) rotate(360deg);
 }
 
 #username {
