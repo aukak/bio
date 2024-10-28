@@ -39,7 +39,7 @@
             <div class="audio-player">
                 <div class="song-title" id="song-title">Current Song: none</div>
                 <button id="change-song-btn">Change Song</button>
-                 <div class="progress-note">Progress Slider</div>
+                <div class="progress-note">Progress Slider</div>
                 <input type="range" id="progress-bar" value="0" step="0.1">
             </div>
         </div>
@@ -77,6 +77,12 @@
                 }
             }
 
+            const savedVolume = localStorage.getItem('bgMusicVolume');
+            if (savedVolume !== null) {
+                bgMusic.volume = savedVolume;
+                volumeControl.value = savedVolume;
+            }
+
             overlay.addEventListener('click', () => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
@@ -87,7 +93,9 @@
             });
 
             volumeControl.addEventListener('input', (e) => {
-                bgMusic.volume = e.target.value;
+                const volume = e.target.value;
+                bgMusic.volume = volume;
+                localStorage.setItem('bgMusicVolume', volume);
             });
 
             changeSongBtn.addEventListener('click', changeSong);
