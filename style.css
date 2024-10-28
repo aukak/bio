@@ -60,7 +60,7 @@ html, body {
     color: white;
     padding: 5px;
     border-radius: 5px;
-    font-size: 0.5vw;
+    font-size: 2vw;
     margin: 5px;
     transition: opacity 0.3s;
 }
