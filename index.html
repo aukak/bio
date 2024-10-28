@@ -18,7 +18,7 @@
         <div class="profile-box">
             <div class="profile">
                 <img src="pfp.png" alt="Profile Picture" id="profile-pic">
-                <h1 id="username">bog</h1>
+                <h1 id="username"><span id="username-text">bog</span><span class="tooltip" id="time-tooltip"></span></h1>
             </div>
             <p id="p1">hi. i make dumb websites. A <33333 </p>
             <p id="p1">stuff</p>
@@ -55,28 +55,28 @@
             const songTitle = document.getElementById('song-title');
             const progressBar = document.getElementById('progress-bar');
             const profilePic = document.getElementById('profile-pic');
-            const username = document.getElementById('username');
+            const usernameText = document.getElementById('username-text');
+            const timeTooltip = document.getElementById('time-tooltip');
 
             const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3'];
             let currentSongIndex = 0;
 
             function changeSong() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            bgMusic.src = songs[currentSongIndex];
-            songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                bgMusic.src = songs[currentSongIndex];
+                songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
                 bgMusic.play();
                 updateProgressBar();
 
-                    if (songs[currentSongIndex] === 'needmenow.mp3') {
-                            console.log("Changing to needmenow.mp3");
-                        profilePic.src = 'szvypfp.png';
-                        username.textContent = 'szvy';
-                                                } else {
-                            profilePic.src = 'pfp.png';
-                                username.textContent = 'bog';
-                            }
+                if (songs[currentSongIndex] === 'needmenow.mp3') {
+                    console.log("Changing to needmenow.mp3");
+                    profilePic.src = 'szvypfp.png';
+                    usernameText.textContent = 'szvy';
+                } else {
+                    profilePic.src = 'pfp.png';
+                    usernameText.textContent = 'bog';
+                }
             }
-
 
             const savedVolume = localStorage.getItem('bgMusicVolume');
             if (savedVolume !== null) {
@@ -100,7 +100,6 @@
             });
 
             changeSongBtn.addEventListener('click', changeSong);
-
             bgMusic.addEventListener('timeupdate', updateProgressBar);
 
             progressBar.addEventListener('input', (e) => {
@@ -112,6 +111,21 @@
                 const progressPercent = (bgMusic.currentTime / bgMusic.duration) * 100;
                 progressBar.value = progressPercent || 0;
             }
+
+            function updateTooltip() {
+                const date = new Date();
+                const options = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+                timeTooltip.textContent = date.toLocaleTimeString('en-US', options);
+            }
+
+            usernameText.addEventListener('mouseenter', () => {
+                updateTooltip();
+                timeTooltip.style.display = 'inline';
+            });
+
+            usernameText.addEventListener('mouseleave', () => {
+                timeTooltip.style.display = 'none';
+            });
         });
     </script>
 </body>
