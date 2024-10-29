@@ -177,5 +177,15 @@
 });
 
     </script>
+    <script>
+    let titleText = "banana ";
+    let speed = 350;
+    function scrollTitle() {
+        document.title = titleText;
+        titleText = titleText.substring(1) + titleText[0];
+        setTimeout(scrollTitle, speed);
+    }
+    scrollTitle();
+</script>
 </body>
 </html>
