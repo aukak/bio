@@ -14,19 +14,18 @@
     <video autoplay muted loop id="bg-video">
         <source src="bg.mp4" type="video/mp4">
     </video>
-    <div class="content" style="display: none;">
+    <div class="content">
         <div class="profile-box">
             <div class="profile">
                 <img src="pfp.png" alt="Profile Picture" id="profile-pic">
-                <h1 id="username"><span id="username-text">bog</span><span class="tooltip" id="time-tooltip" style="display: none;"></span></h1>
+                <h1 id="username"><span id="username-text">bog</span><span class="tooltip" id="time-tooltip"></span></h1>
             </div>
             <p id="p1">hi. i make dumb websites. A <33333 </p>
-            <p id="p2">stuff</p>
+            <p id="p1">stuff</p>
             <div class="links">
                 <a href="https://play.learnscience.site" class="link">Learn Sci</a>
                 <a href="https://sites.google.com/view/learn-sci" class="link">Learn Sci GSITE</a>
-            </div>
-            <br>
+            </div> <br>
             <p id="p1">my socials</p>
             <div class="links">
                 <a href="https://github.com/aukak" class="link">github</a>
@@ -40,7 +39,7 @@
                 <div class="song-title" id="song-title">Current Song: none</div>
                 <button id="change-song-btn">Change Song</button>
                 <div class="progress-note">Progress Slider</div>
-                <input type="range" id="progress-bar" value="0" step="0.1" disabled>
+                <input type="range" id="progress-bar" value="0" step="0.1">
             </div>
         </div>
         <audio id="bg-music" src="bg.mp3" loop></audio>
@@ -70,11 +69,14 @@
                 updateProgressBar();
 
                 if (songs[currentSongIndex] === 'needmenow.mp3') {
+                    console.log("Changing to needmenow.mp3");
                     profilePic.src = 'szvypfp.png';
                     usernameText.textContent = 'szvy';
+
                 } else if (songs[currentSongIndex] === 'St.chroma.mp3') {
+                    console.log("Changing to St.chroma.mp3");
                     profilePic.src = 'tyler.png';
-                    usernameText.textContent = 'Tyler, The Creator';
+                    usernameText.textContent = 'Tyler, The creator';
                 } else {
                     profilePic.src = 'pfp.png';
                     usernameText.textContent = 'bog';
