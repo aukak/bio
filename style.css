@@ -145,6 +145,12 @@ html, body {
   margin-bottom: 10px;
 }
 
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
 #volume-control {
   -webkit-appearance: none;
   width: 20vw;
@@ -272,5 +278,9 @@ html, body {
 
   .song-title {
     font-size: 3vw;
+
+    .link {
+    font-size: 2vw;
+  }
   }
 }
