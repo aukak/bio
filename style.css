@@ -223,6 +223,12 @@ html, body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+#change-song-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
 .progress-note {
   color: white;
   font-size: 1vw;
