@@ -133,7 +133,7 @@
         analyser.getByteFrequencyData(dataArray);
         const average = dataArray.reduce((a, b) => a + b) / bufferLength;
 
-        const scale = 1 + average / 50;
+        const scale = 1 + average / 150;
         profilePic.style.transform = `scale(${scale})`; 
 
         requestAnimationFrame(animatePulse);
