@@ -46,92 +46,115 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const overlay = document.getElementById('overlay');
-            const content = document.querySelector('.content');
-            const bgMusic = document.getElementById('bg-music');
-            const volumeControl = document.getElementById('volume-control');
-            const changeSongBtn = document.getElementById('change-song-btn');
-            const songTitle = document.getElementById('song-title');
-            const progressBar = document.getElementById('progress-bar');
-            const profilePic = document.getElementById('profile-pic');
-            const usernameText = document.getElementById('username-text');
-            const timeTooltip = document.getElementById('time-tooltip');
+       document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('overlay');
+    const content = document.querySelector('.content');
+    const bgMusic = document.getElementById('bg-music');
+    const volumeControl = document.getElementById('volume-control');
+    const changeSongBtn = document.getElementById('change-song-btn');
+    const songTitle = document.getElementById('song-title');
+    const progressBar = document.getElementById('progress-bar');
+    const profilePic = document.getElementById('profile-pic');
+    const usernameText = document.getElementById('username-text');
+    const timeTooltip = document.getElementById('time-tooltip');
 
-            const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3'];
-            let currentSongIndex = 0;
+    const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3'];
+    let currentSongIndex = 0;
 
-            function changeSong() {
-                currentSongIndex = (currentSongIndex + 1) % songs.length;
-                bgMusic.src = songs[currentSongIndex];
-                songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
-                bgMusic.play();
-                updateProgressBar();
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const analyser = audioContext.createAnalyser();
+    const source = audioContext.createMediaElementSource(bgMusic);
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+    
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
-                if (songs[currentSongIndex] === 'needmenow.mp3') {
-                    profilePic.src = 'szvypfp.png';
-                    usernameText.textContent = 'szvy';
-                } else if (songs[currentSongIndex] === 'St.chroma.mp3') {
-                    profilePic.src = 'tyler.png';
-                    usernameText.textContent = 'Tyler, The Creator';
-                } else if (songs[currentSongIndex] === 'balloon.mp3') {
-                    profilePic.src = 'tyler.png'; 
-                    usernameText.textContent = 'Tyler, The Creator'; 
-                } else {
-                    profilePic.src = 'pfp.png';
-                    usernameText.textContent = 'bog';
-                }
-            }
+    function changeSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        bgMusic.src = songs[currentSongIndex];
+        songTitle.textContent = `Current Song: ${songs[currentSongIndex]}`;
+        bgMusic.play();
+        updateProgressBar();
 
-            const savedVolume = localStorage.getItem('bgMusicVolume');
-            if (savedVolume !== null) {
-                bgMusic.volume = savedVolume;
-                volumeControl.value = savedVolume;
-            }
+        if (songs[currentSongIndex] === 'needmenow.mp3') {
+            profilePic.src = 'szvypfp.png';
+            usernameText.textContent = 'szvy';
+        } else if (songs[currentSongIndex] === 'St.chroma.mp3') {
+            profilePic.src = 'tyler.png';
+            usernameText.textContent = 'Tyler, The Creator';
+        } else if (songs[currentSongIndex] === 'balloon.mp3') {
+            profilePic.src = 'tyler.png'; 
+            usernameText.textContent = 'Tyler, The Creator'; 
+        } else {
+            profilePic.src = 'pfp.png';
+            usernameText.textContent = 'bog';
+        }
+    }
 
-            overlay.addEventListener('click', () => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    content.style.display = 'flex';
-                    bgMusic.play();
-                }, 1000);
-            });
+    const savedVolume = localStorage.getItem('bgMusicVolume');
+    if (savedVolume !== null) {
+        bgMusic.volume = savedVolume;
+        volumeControl.value = savedVolume;
+    }
 
-            volumeControl.addEventListener('input', (e) => {
-                const volume = e.target.value;
-                bgMusic.volume = volume;
-                localStorage.setItem('bgMusicVolume', volume);
-            });
+    overlay.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            content.style.display = 'flex';
+            bgMusic.play();
+            audioContext.resume(); 
+            animatePulse(); 
+        }, 1000);
+    });
 
-            changeSongBtn.addEventListener('click', changeSong);
-            bgMusic.addEventListener('timeupdate', updateProgressBar);
+    volumeControl.addEventListener('input', (e) => {
+        const volume = e.target.value;
+        bgMusic.volume = volume;
+        localStorage.setItem('bgMusicVolume', volume);
+    });
 
-            progressBar.addEventListener('input', (e) => {
-                const newTime = (e.target.value / 100) * bgMusic.duration;
-                bgMusic.currentTime = newTime;
-            });
+    changeSongBtn.addEventListener('click', changeSong);
+    bgMusic.addEventListener('timeupdate', updateProgressBar);
 
-            function updateProgressBar() {
-                const progressPercent = (bgMusic.currentTime / bgMusic.duration) * 100;
-                progressBar.value = progressPercent || 0;
-            }
+    progressBar.addEventListener('input', (e) => {
+        const newTime = (e.target.value / 100) * bgMusic.duration;
+        bgMusic.currentTime = newTime;
+    });
 
-            function updateTooltip() {
-                const date = new Date();
-                const options = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-                timeTooltip.textContent = date.toLocaleTimeString('en-US', options);
-            }
+    function updateProgressBar() {
+        const progressPercent = (bgMusic.currentTime / bgMusic.duration) * 100;
+        progressBar.value = progressPercent || 0;
+    }
 
-            usernameText.addEventListener('mouseenter', () => {
-                updateTooltip();
-                timeTooltip.style.display = 'inline';
-            });
+    function animatePulse() {
+        analyser.getByteFrequencyData(dataArray);
+        const average = dataArray.reduce((a, b) => a + b) / bufferLength;
 
-            usernameText.addEventListener('mouseleave', () => {
-                timeTooltip.style.display = 'none';
-            });
-        });
+        const scale = 1 + average / 100;
+        profilePic.style.transform = `scale(${scale})`; 
+
+        requestAnimationFrame(animatePulse);
+    }
+
+    function updateTooltip() {
+        const date = new Date();
+        const options = { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        timeTooltip.textContent = date.toLocaleTimeString('en-US', options);
+    }
+
+    usernameText.addEventListener('mouseenter', () => {
+        updateTooltip();
+        timeTooltip.style.display = 'inline';
+    });
+
+    usernameText.addEventListener('mouseleave', () => {
+        timeTooltip.style.display = 'none';
+    });
+});
+
     </script>
 </body>
 </html>
