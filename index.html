@@ -58,7 +58,7 @@
     const usernameText = document.getElementById('username-text');
     const timeTooltip = document.getElementById('time-tooltip');
 
-    const songs = ['mewtwo.mp3', 'magicjohnson.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3', 'hysteric.mp3', 'pink+white.mp3', 'stronger.mp3'];
+    const songs = ['magicjohnson.mp3', 'mewtwo.mp3', 'overseas.mp3', 'needmenow.mp3', 'timeless.mp3', 'St.chroma.mp3', 'balloon.mp3', 'hysteric.mp3', 'pink+white.mp3', 'stronger.mp3'];
     let currentSongIndex = 0;
 
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -87,6 +87,27 @@
         } else if (songs[currentSongIndex] === 'balloon.mp3') {
             profilePic.src = 'tyler.png'; 
             usernameText.textContent = 'Tyler, The Creator'; 
+        } else if (songs[currentSongIndex] === 'overseas.mp3') {
+            profilePic.src = 'ken.png'; 
+            usernameText.textContent = 'Ken Carson'; 
+        } else if (songs[currentSongIndex] === 'timeless.mp3') {
+            profilePic.src = 'playboi.png'; 
+            usernameText.textContent = 'The Weekend'; 
+        } else if (songs[currentSongIndex] === 'needmenow.mp3') {
+            profilePic.src = 'may.png'; 
+            usernameText.textContent = 'Awesomemay'; 
+        } else if (songs[currentSongIndex] === 'magicjohnson.mp3') {
+            profilePic.src = 'ian.png'; 
+            usernameText.textContent = 'Ian'; 
+        } else if (songs[currentSongIndex] === 'hysteric.mp3') {
+            profilePic.src = 'hysteric.png'; 
+            usernameText.textContent = 'Jaydes'; 
+        } else if (songs[currentSongIndex] === 'pink+white.mp3') {
+            profilePic.src = 'frank.png'; 
+            usernameText.textContent = 'Frank ocean'; 
+        } else if (songs[currentSongIndex] === 'stronger.mp3') {
+            profilePic.src = 'ye.png'; 
+            usernameText.textContent = 'Kanye West'; 
         } else {
             profilePic.src = 'pfp.png';
             usernameText.textContent = 'bog';
