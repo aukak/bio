@@ -39,7 +39,6 @@ html, body {
   background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid white;
   border-radius: 10px;
-  animation: pulse 2s infinite;
   font-size: 1vw;
 }
 
@@ -54,15 +53,15 @@ html, body {
 }
 
 .tooltip {
-    display: none;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 1.5vw;
-    margin: 5px;
-    transition: opacity 0.3s;
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.5vw;
+  margin: 5px;
+  transition: opacity 0.3s;
 }
 
 .profile-box {
@@ -95,40 +94,15 @@ html, body {
   width: 10vw;
   height: 10vw;
   margin-bottom: 5px;
-  transition: transform 0.5s ease; 
 }
 
 #profile-pic:hover {
-  animation: spinLoop 5s linear infinite; 
-  animation-delay: 0.5s;
   transform: scale(1.1);
-}
-
-@keyframes spinLoop {
-  from {
-    transform: rotate(0deg) scale(1.1); 
-  }
-  to {
-    transform: rotate(360deg) scale(1.1); 
-  }
-}
-
-#profile-pic:not(:hover) {
-  animation: spinBack 0.5s ease forwards; 
-}
-
-@keyframes spinBack {
-  from {
-    transform: rotate(360deg) scale(1.1); 
-  }
-  to {
-    transform: rotate(0deg) scale(1); 
-  }
 }
 
 #username {
   font-size: 2vw;
-  background: linear-gradient(120deg, #b8b8b8, #e6e6e6, #b8b8b8, #5c5c5c, #e6e6e6);
+  background: linear-gradient(120deg, #b8b8b8, #e6e6e6, #b8b8b8, #5c5c5c);
   background-size: 300%;
   -webkit-background-clip: text;
   color: transparent;
@@ -169,12 +143,6 @@ html, body {
   margin-bottom: 10px;
 }
 
-.link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-}
-
 #volume-control {
   -webkit-appearance: none;
   width: 20vw;
@@ -198,11 +166,6 @@ html, body {
   box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
 }
 
-#volume-control::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
-}
-
 #volume-control::-moz-range-thumb {
   width: 18px;
   height: 18px;
@@ -212,11 +175,6 @@ html, body {
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
-}
-
-#volume-control::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
 }
 
 .volume-container {
@@ -257,17 +215,11 @@ html, body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-#change-song-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-}
 .progress-note {
-    color: white;
-    font-size: 1vw;
-    margin: 5px 0;
+  color: white;
+  font-size: 1vw;
+  margin: 5px 0;
 }
-
 
 #progress-bar {
   -webkit-appearance: none;
@@ -291,11 +243,6 @@ html, body {
   box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
 }
 
-#progress-bar::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
-}
-
 #progress-bar::-moz-range-thumb {
   width: 18px;
   height: 18px;
@@ -307,22 +254,13 @@ html, body {
   box-shadow: 0 0 10px rgba(191, 191, 191, 0.7);
 }
 
-#progress-bar::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(191, 191, 191, 1), 0 0 20px rgba(77, 77, 77, 0.8);
-}
-
-@media (max-width: 768px) {
-  #overlay {
-    font-size: 3vw;
-  }
-
-  #enter-text {
-    font-size: 2.5vw;
+@media (max-width: 600px) {
+  #username {
+    font-size: 5vw;
   }
 
   .profile-box {
-    font-size: 2.5vw;
+    max-width: 90%;
   }
 
   #profile-pic {
@@ -330,19 +268,7 @@ html, body {
     height: 20vw;
   }
 
-  #username {
-    font-size: 4vw;
-  }
-
-  .link {
-    font-size: 2vw;
-  }
-
-  #volume-control {
-    width: 30vw;
-  }
-
-  #progress-bar {
-    width: 90%; 
+  .song-title {
+    font-size: 3vw;
   }
 }
