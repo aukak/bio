@@ -89,12 +89,14 @@ html, body {
 }
 
 #profile-pic {
-  border-radius: 50%;
-  border: 5px solid white;
-  width: 10vw;
-  height: 10vw;
-  margin-bottom: 5px;
+    border-radius: 50%;
+    border: 5px solid white;
+    width: 10vw;
+    height: 10vw;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease; 
 }
+
 
 #profile-pic:hover {
   transform: scale(1.1);
