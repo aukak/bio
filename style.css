@@ -94,7 +94,7 @@ html, body {
     width: 10vw;
     height: 10vw;
     margin-bottom: 5px;
-    transition: transform 0.3s ease; 
+    transition: transform 0.05s ease; 
 }
 
 
