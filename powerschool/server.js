@@ -20,7 +20,7 @@ app.get("/youtube", (req, res) => {
   res.send(`
     <h1>YouTube Proxy</h1>
     <form method="POST" action="/youtube">
-      <p>URL: <input type="text" name="url"></p>
+      <p>URL: <input type="text" name="url" required></p>
       <p><input type="submit" value="GO"></p>
     </form>
   `);
@@ -57,4 +57,5 @@ app.get("/yt/v/:id", (req, res) => {
   ytdl(id, { quality: "18" }).pipe(res);
 });
 
+// Start the server
 app.listen(3000, () => console.log("Server is running on http://localhost:3000"));
