@@ -13,15 +13,19 @@
         <div class="loading-text">Loading...</div>
     </div>
     <div id="content">
-        <h1>
-        YouTube Proxy</h1>
+        <h1>YouTube Proxy</h1>
         <input type="text" id="videoUrl" placeholder="Enter YouTube URL">
         <button id="loadVideo">Load Video</button>
+        <div id="videoControls">
+            <button id="playVideo">Play</button>
+            <button id="pauseVideo">Pause</button>
+            <input type="range" id="seekBar" value="0" min="0" max="100" step="1">
+        </div>
         <iframe id="videoPlayer" width="560" height="315" allowfullscreen></iframe>
-        <footer>
-            <p>&copy; 2024 Learn Science . All rights reserved.</p>
-        </footer>
     </div>
+    <footer>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
