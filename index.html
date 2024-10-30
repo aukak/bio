@@ -6,11 +6,6 @@
     <link rel="icon" type="image/png" href="image.png"/>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>
-        if (window.location.pathname === '/test') {
-            window.location.href = '/';
-        }
-    </script>
 </head>
 <body>
     <div id="overlay">
@@ -51,6 +46,10 @@
     </div>
 
     <script>
+       
+        if (window.location.pathname === '/y') {
+            window.location.href = '/';
+      }
         document.addEventListener('DOMContentLoaded', () => {
             const overlay = document.getElementById('overlay');
             const content = document.querySelector('.content');
