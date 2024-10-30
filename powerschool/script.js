@@ -3,7 +3,7 @@ document.getElementById('loadVideo').addEventListener('click', function() {
     const videoId = extractVideoId(videoUrl);
     if (videoId) {
         const videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
+        videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     } else {
         alert('Invalid YouTube URL');
     }
