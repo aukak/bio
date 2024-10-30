@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #121212;
+            color: white;
+        }
+
+        #redirect-text {
+            font-size: 2vw;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border: 2px solid white;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+    <title>Redirecting...</title>
+</head>
+<body>
+    <div id="redirect-text">Redirecting to the Video Proxy...</div>
+    <script>
+        setTimeout(function() {
+            window.location.href = "/video"; 
+        }, 2000);
+    </script>
+</body>
+</html>
