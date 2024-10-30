@@ -1,20 +1,79 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Piazzolla&display=swap" rel="stylesheet">
-<title><%= title %></title>
 <style>
-  body { font-family: 'Piazzolla', serif; text-align: center; margin-top: 50px; }
-  #videoContainer { display: none; }
+  body {
+    font-family: 'Piazzolla', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  h1 {
+    color: #4A90E2;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  .video-container {
+    display: none;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  video {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  input[type="text"] {
+    padding: 8px;
+    font-size: 1em;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background-color: #4A90E2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #357ABD;
+  }
 </style>
 </head>
 <body>
 <h1><%= title %></h1>
-<button onclick="loadVideo()">Load Video</button>
-<div id="videoContainer">
-  <video id="videoPlayer" controls style="width: 100%; max-width: 560px;">
+<div class="form-container">
+  <p>Load your video:</p>
+  <button onclick="loadVideo()">Load Video</button>
+</div>
+<div id="videoContainer" class="video-container">
+  <video id="videoPlayer" controls>
     <source src="/yt/v/<%= id %>" type="video/mp4">
     Your browser does not support the video tag.
   </video>
