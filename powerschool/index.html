@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Proxy</title>
+      <link rel="icon" type="image/png" href="image.png"/>
+    <title>Powerschool</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
+    <div class="overlay">
         <h1>YouTube Proxy</h1>
         <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL">
         <button id="loadVideo">Load Video</button>
-    </header>
+    </div>
     <main>
-        <iframe id="videoPlayer" width="100%" height="500px" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+     
     </main>
 </body>
 </html>
