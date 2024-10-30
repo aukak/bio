@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="image.png"/>
     <title>Powerschool</title>
 </head>
 <body>
+    <div id="loading">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading...</div>
+    </div>
     <div id="content">
-         <h1>YouTube Proxy</h1>
+        <h1>YouTube Proxy</h1>
         <input type="text" id="videoUrl" placeholder="Enter YouTube URL">
         <button id="loadVideo">Load Video</button>
         <iframe id="videoPlayer" width="560" height="315" allowfullscreen></iframe>
