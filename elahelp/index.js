@@ -1,78 +1,79 @@
+const express = require("express");
+const ytdl = require("ytdl-core");
+const cors = require("cors");
 const { default: NiconicoDL } = require("niconico-dl.js/dist");
 
-//変数s
-const express = require("express"), app = express(), ytdl = require("ytdl-core"), cors = require('cors'), { Buffer } = require("buffer"), fs = require("fs")
-app.use(cors())
-app.use(express.raw({ type: "*/*" }))
+const app = express();
+app.use(cors());
+app.use(express.raw({ type: "*/*" }));
 
-//エラーハンドリング
-process.on("uncaughtException", function(err) {
-  console.log(err);
+
+process.on("uncaughtException", (err) => {
+    console.log("Error:", err);
 });
+
 
 app.get("/", (req, res) => {
-  res.send('<a href="/youtube/">youtube proxyはこちら</a><br><a href="/niconico/">ニコニコ動画 proxyはこちら</a>')
-})
-app.get("/youtube", (req, res) => {
-  res.send(`<h1>YouTube Proxy</h1><form method="POST" autocomplete="off">
-    <p>URL：<input type="text" name="url"></p>
-    <p><input type="submit" value="GO"></p>
-  </form>`)
+    res.send('<a href="/youtube/">YouTube Proxyはこちら</a><br><a href="/niconico/">ニコニコ動画 Proxyはこちら</a>');
 });
+
+
+app.get("/youtube", (req, res) => {
+    res.send(`<h1>YouTube Proxy</h1><form method="POST" autocomplete="off">
+        <p>URL：<input type="text" name="url"></p>
+        <p><input type="submit" value="GO"></p>
+    </form>`);
+});
+
+
 app.get("/niconico", (req, res) => {
-  res.send(`<h1>NicoVideo Proxy</h1><form method="POST" autocomplete="off">
-    <p>URL：<input type="text" name="url"></p>
-    <p><input type="submit" value="GO"></p>
-  </form>`)
-})
+    res.send(`<h1>NicoVideo Proxy</h1><form method="POST" autocomplete="off">
+        <p>URL：<input type="text" name="url"></p>
+        <p><input type="submit" value="GO"></p>
+    </form>`);
+});
+
+
 app.post("/youtube", async (req, res) => {
+    const url = decodeURIComponent(Buffer.from(req.body).toString()).split(";")[0].replace("url=", "");
+    const videoId = ytdl.getURLVideoID(url);
+    res.redirect(`/youtube/${videoId}`);
+});
 
-
-  console.log(Buffer.from(req.body).toString())
-  res.redirect(`/youtube/${ytdl.getURLVideoID(decodeURIComponent(Buffer.from(req.body).toString()).split(";")[0].replace("url=", ""))}`)
-})
 
 app.post("/niconico", async (req, res) => {
-let id = (await new NiconicoDL(decodeURIComponent(Buffer.from(req.body).toString()).split(";")[0].replace("url=", "")).getVideoInfo()).id;
+    const url = decodeURIComponent(Buffer.from(req.body).toString()).split(";")[0].replace("url=", "");
+    const videoInfo = await new NiconicoDL(url).getVideoInfo();
+    res.redirect(`/niconico/${videoInfo.id}`);
+});
 
-  console.log(Buffer.from(req.body).toString())
-  res.redirect(`/niconico/${id}`)
-})
 
 app.get("/youtube/:id", async (req, res) => {
-  var r = { id: req.params.id }
-  var stream = await ytdl.getBasicInfo(req.params.id);
-
-  var title = stream.videoDetails.title
-  r.title = title
-  res.render("../views/video.ejs", r)
-
-
-})
-app.get("/yt/v/:id", (req, res) => {
-  var URL = req.params.id;
-  var stream = ytdl(URL);
-  stream.on('info', (info) => {
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-    ytdl(URL, {
-      quality: '18',
-    }).pipe(res);
-  });
+    const id = req.params.id;
+    const info = await ytdl.getBasicInfo(id);
+    res.render("../views/video.ejs", { id, title: info.videoDetails.title });
 });
+
+
+app.get("/yt/v/:id", (req, res) => {
+    const id = req.params.id;
+    res.header("Content-Disposition", 'attachment; filename="video.mp4"');
+    ytdl(id, { quality: "18" }).pipe(res);
+});
+
 
 app.get("/niconico/:id", async (req, res) => {
-  var r = { id: req.params.id };
-  r.title = (await new NiconicoDL(`https://nicovideo.jp/watch/${r.id}`).getVideoInfo()).title;
-  
-  res.render("../views/niconico.ejs", r)
-
-
-})
-app.get("/nico/v/:id", async (req, res) => {
-  var URL = `https://nicovideo.jp/watch/${req.params.id}`;
-  let nico = new NiconicoDL(URL);
-  res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-  (await nico.download()).pipe(res);
+    const id = req.params.id;
+    const videoInfo = await new NiconicoDL(`https://nicovideo.jp/watch/${id}`).getVideoInfo();
+    res.render("../views/niconico.ejs", { id, title: videoInfo.title });
 });
 
-app.listen(3000)
+
+app.get("/nico/v/:id", async (req, res) => {
+    const id = req.params.id;
+    const nicoDL = new NiconicoDL(`https://nicovideo.jp/watch/${id}`);
+    res.header("Content-Disposition", 'attachment; filename="video.mp4"');
+    (await nicoDL.download()).pipe(res);
+});
+
+app.listen(3000, () => console.log("Server is running on port 3000"));
