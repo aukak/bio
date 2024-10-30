@@ -6,7 +6,15 @@ app.use(express.static('public'));
 
 app.get('/proxy', (req, res) => {
     const url = req.query.url;
-    request(url).pipe(res);
+    if (!url) {
+        return res.status(400).send('URL is required');
+    }
+    request(url)
+        .on('error', (err) => {
+            console.error(err);
+            res.status(500).send('Error while proxying request');
+        })
+        .pipe(res);
 });
 
 const PORT = process.env.PORT || 3000;
