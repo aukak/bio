@@ -32,7 +32,7 @@ app.post("/youtube", async (req, res) => {
     if (!ytdl.validateURL(url)) return res.status(400).send("Invalid URL");
 
     const videoId = ytdl.getURLVideoID(url);
-    res.redirect(`/youtube/${videoId}`);
+    res.redirect(`/youtube/${videoId}`); 
   } catch (error) {
     console.error(error);
     res.status(500).send("Error processing request");
