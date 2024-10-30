@@ -1,16 +1,3 @@
-window.onload = function() {
-    const loading = document.getElementById('loading');
-    const content = document.getElementById('content');
-
-    setTimeout(() => {
-        loading.classList.add('fade-out');
-        setTimeout(() => {
-            loading.style.display = 'none'; 
-            content.style.display = 'flex'; 
-        }, 1000);
-    }, 2000); 
-};
-
 document.getElementById('loadVideo').addEventListener('click', function() {
     const videoUrl = document.getElementById('videoUrl').value;
     const videoId = extractVideoId(videoUrl);
