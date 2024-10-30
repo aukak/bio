@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
+
 app.get("/youtube", (req, res) => {
   res.send(`
     <h1>YouTube Proxy</h1>
@@ -25,6 +26,7 @@ app.get("/youtube", (req, res) => {
     </form>
   `);
 });
+
 
 app.post("/youtube", async (req, res) => {
   try {
@@ -39,6 +41,7 @@ app.post("/youtube", async (req, res) => {
   }
 });
 
+
 app.get("/youtube/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -51,11 +54,12 @@ app.get("/youtube/:id", async (req, res) => {
   }
 });
 
+
 app.get("/yt/v/:id", (req, res) => {
   const id = req.params.id;
   res.header("Content-Disposition", 'attachment; filename="video.mp4"');
   ytdl(id, { quality: "18" }).pipe(res);
 });
 
-// Start the server
+
 app.listen(3000, () => console.log("Server is running on http://localhost:3000"));
