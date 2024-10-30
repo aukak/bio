@@ -20,25 +20,47 @@
             justify-content: center;
             background-color: #121212;
             color: white;
-        }
-
-        #redirect-text {
-            font-size: 2vw;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border: 2px solid white;
-            border-radius: 10px;
             text-align: center;
         }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(28, 28, 28, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5vw;
+            margin-bottom: 20px;
+        }
+
+        .link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 15px 30px;
+            font-size: 1.2vw;
+            color: white;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+            border: 2px solid white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
     </style>
-    <title>Redirecting...</title>
+    <title>Video Proxy</title>
 </head>
 <body>
-    <div id="redirect-text">Redirecting to the Video Proxy...</div>
-    <script>
-        setTimeout(function() {
-            window.location.href = "/video"; 
-        }, 2000);
-    </script>
+    <div class="container">
+        <h1>Welcome to the Video Proxy</h1>
+        <a href="/video" class="link">YouTube Proxy</a>
+        <a href="/niconico" class="link">NicoVideo Proxy</a>
+    </div>
 </body>
 </html>
