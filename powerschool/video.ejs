@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Piazzolla&display=swap" rel="stylesheet">
+<title><%= title %></title>
+<style>
+  body { font-family: 'Piazzolla', serif; text-align: center; margin-top: 50px; }
+  #videoContainer { display: none; }
+</style>
+</head>
+<body>
+<h1><%= title %></h1>
+<button onclick="loadVideo()">Load Video</button>
+<div id="videoContainer">
+  <video id="videoPlayer" controls style="width: 100%; max-width: 560px;">
+    <source src="/yt/v/<%= id %>" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<script>
+  function loadVideo() {
+    document.getElementById('videoContainer').style.display = 'block';
+  }
+</script>
+</body>
+</html>
