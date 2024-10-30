@@ -1,25 +1,20 @@
+window.onload = function() {
+    setTimeout(function() {
+        const loading = document.getElementById('loading');
+        loading.style.opacity = 0;
+        setTimeout(function() {
+            loading.style.display = 'none';
+            document.getElementById('content').style.display = 'flex';
+        }, 1000);
+    }, 2000);
+};
+
 document.getElementById('loadVideo').addEventListener('click', function() {
     const videoUrl = document.getElementById('videoUrl').value;
     const videoId = extractVideoId(videoUrl);
-    const loadingScreen = document.getElementById('loading'); 
-
     if (videoId) {
         const videoPlayer = document.getElementById('videoPlayer');
-        
-      
-        loadingScreen.style.display = 'flex'; 
-        loadingScreen.classList.remove('hide-loading'); 
-        
-      
         videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        
-      
-        videoPlayer.onload = function() {
-            loadingScreen.classList.add('hide-loading'); 
-            setTimeout(() => {
-                loadingScreen.style.display = 'none'; 
-            }, 500); 
-        };
     } else {
         alert('Invalid YouTube URL');
     }
