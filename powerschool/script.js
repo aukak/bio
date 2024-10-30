@@ -1,12 +1,14 @@
 window.onload = function() {
-    setTimeout(function() {
-        const loading = document.getElementById('loading');
-        loading.style.opacity = 0;
-        setTimeout(function() {
-            loading.style.display = 'none';
-            document.getElementById('content').style.display = 'flex';
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('content');
+
+    setTimeout(() => {
+        loading.classList.add('fade-out');
+        setTimeout(() => {
+            loading.style.display = 'none'; 
+            content.style.display = 'flex'; 
         }, 1000);
-    }, 2000);
+    }, 2000); 
 };
 
 document.getElementById('loadVideo').addEventListener('click', function() {
