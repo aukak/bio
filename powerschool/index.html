@@ -7,6 +7,8 @@
 <style>
   body { font-family: 'Piazzolla', serif; display: flex; flex-direction: column; align-items: center; margin-top: 50px; }
   iframe { width: 560px; height: 315px; border: none; }
+  #controls { margin-top: 10px; display: flex; gap: 10px; align-items: center; }
+  input[type="range"] { width: 400px; }
 </style>
 </head>
 <body>
@@ -14,18 +16,65 @@
 <input id="videoId" placeholder="Enter YouTube Video ID" />
 <button onclick="loadVideo()">Load Video</button>
 <div id="videoContainer"></div>
+<div id="controls" style="display: none;">
+  <button onclick="playVideo()">Play</button>
+  <button onclick="pauseVideo()">Pause</button>
+  <input type="range" id="seekBar" min="0" max="100" value="0" step="1" oninput="seekVideo()">
+</div>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  async function loadVideo() {
+  let player;
+  let duration;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('videoContainer', {
+      height: '315',
+      width: '560',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function loadVideo() {
     const videoId = document.getElementById('videoId').value;
     if (!videoId) return alert('Please enter a video ID');
 
-    try {
-      const response = await fetch(`/proxy?id=${videoId}`);
-      const videoInfo = await response.text();
-      document.getElementById('videoContainer').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
-    } catch (error) {
-      console.error('Error loading video:', error);
+    player.loadVideoById(videoId);
+    document.getElementById('controls').style.display = 'flex';
+  }
+
+  function onPlayerReady(event) {
+    duration = player.getDuration();
+    document.getElementById('seekBar').max = duration;
+    setInterval(updateSeekBar, 1000);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      duration = player.getDuration();
+      document.getElementById('seekBar').max = duration;
     }
+  }
+
+  function playVideo() {
+    player.playVideo();
+  }
+
+  function pauseVideo() {
+    player.pauseVideo();
+  }
+
+  function updateSeekBar() {
+    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+      document.getElementById('seekBar').value = player.getCurrentTime();
+    }
+  }
+
+  function seekVideo() {
+    const seekTo = document.getElementById('seekBar').value;
+    player.seekTo(seekTo);
   }
 </script>
 </body>
