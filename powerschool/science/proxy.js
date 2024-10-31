@@ -9,16 +9,22 @@ export async function onRequest(context) {
 
     try {
         const response = await fetch(targetUrl);
-        const data = await response.text();
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch data from the target URL');
+        }
+
+        const data = await response.text(); 
 
         return new Response(data, {
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*', 
+                'Content-Type': response.headers.get('Content-Type') || 'application/json', 
+                'Access-Control-Allow-Origin': '*',
             },
             status: response.status,
         });
     } catch (error) {
+        console.error('Error fetching data:', error.message);
         return new Response('Failed to fetch data', { status: 500 });
     }
 }
