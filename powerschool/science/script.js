@@ -11,7 +11,7 @@ document.getElementById("fetchButton").addEventListener("click", async function(
     resultDiv.classList.add("hidden");
 
     try {
-        const response = await fetch(`https://aukbio.pages.dev/api/proxy?url=${encodeURIComponent(urlInput)}`);
+        const response = await fetch(`https://aukbio.pages.dev/powerschool/proxy?url=${encodeURIComponent(urlInput)}`);
         if (!response.ok) {
             throw new Error('Failed to fetch data from the proxy.');
         }
