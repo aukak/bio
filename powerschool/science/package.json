@@ -1,0 +1,14 @@
+{
+  "name": "science-proxy",
+  "version": "1.0.0",
+  "description": "A simple proxy to fetch data from URLs",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  }
+}
