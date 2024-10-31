@@ -8,17 +8,18 @@ document.getElementById("fetchButton").addEventListener("click", async function(
         return;
     }
 
-    resultDiv.textContent = "Fetching data...";
-    resultDiv.classList.remove("hidden");
+    resultDiv.classList.add("hidden");
 
     try {
         const response = await fetch(`http://localhost:3000/proxy?url=${encodeURIComponent(urlInput)}`);
         if (!response.ok) {
-            throw new Error('Failed to fetch data from the provided URL.');
+            throw new Error('Failed to fetch data from the proxy.');
         }
         const data = await response.json();
         resultDiv.textContent = JSON.stringify(data, null, 2);
+        resultDiv.classList.remove("hidden");
     } catch (error) {
         resultDiv.textContent = `Error: ${error.message}`;
+        resultDiv.classList.remove("hidden");
     }
 });
