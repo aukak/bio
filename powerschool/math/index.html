@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="image.png"/>
+    <title>Powerschool | Math</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="content">
+        <h1>Stock Analytics with Chart</h1>
+        <input type="text" id="stock-symbol" placeholder="Enter stock symbol" />
+        <button id="get-stock">Get Stock Info</button>
+        <div id="stock-info"></div>
+        <div id="chart-container" style="display: none;">
+            <iframe id="stockIframe" width="800" height="600" frameborder="0" loading="lazy"></iframe>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
