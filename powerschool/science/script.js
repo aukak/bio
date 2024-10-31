@@ -1,24 +1,16 @@
-document.getElementById("fetchButton").addEventListener("click", async function() {
-    const urlInput = document.getElementById("urlInput").value;
-    const resultDiv = document.getElementById("result");
-
-    if (!urlInput) {
-        resultDiv.textContent = "Please enter a URL.";
-        resultDiv.classList.remove("hidden");
-        return;
-    }
-
-    resultDiv.textContent = "Fetching data...";
-    resultDiv.classList.remove("hidden");
-
-    try {
-        const response = await fetch(`http://localhost:3000/proxy?url=${encodeURIComponent(urlInput)}`);
-        if (!response.ok) {
-            throw new Error('Error fetching data');
-        }
-        const data = await response.json();
-        resultDiv.textContent = JSON.stringify(data, null, 2);
-    } catch (error) {
-        resultDiv.textContent = `Error: ${error.message}`;
+document.getElementById('loadVideo').addEventListener('click', function() {
+    const videoUrl = document.getElementById('videoUrl').value;
+    const videoId = extractVideoId(videoUrl);
+    if (videoId) {
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    } else {
+        alert('Invalid YouTube URL');
     }
 });
+
+function extractVideoId(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const matches = url.match(regex);
+    return matches ? matches[1] : null;
+}
