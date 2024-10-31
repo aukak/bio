@@ -9,7 +9,8 @@ app.get('/proxy', (req, res) => {
     if (!url) {
         return res.status(400).send('URL is required');
     }
-    request(url)
+    request
+        .get(url)
         .on('error', (err) => {
             console.error(err);
             res.status(500).send('Error while proxying request');
