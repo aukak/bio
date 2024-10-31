@@ -13,7 +13,14 @@ document.getElementById("fetchButton").addEventListener("click", async function(
     resultFrame.classList.remove("hidden");
 
     try {
-        const response = await fetch(`/proxy?url=${encodeURIComponent(urlInput)}`);
+        const response = await fetch('/proxy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/plain'
+            },
+            body: urlInput
+        });
+
         if (!response.ok) {
             throw new Error('Failed to fetch data from the proxy.');
         }
