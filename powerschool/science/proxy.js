@@ -8,18 +8,22 @@ export async function onRequest(context) {
     }
 
     try {
-        const response = await fetch(targetUrl);
-        
-        if (!response.ok) {
-            throw new Error('Failed to fetch data from the target URL');
-        }
+        const response = await fetch(targetUrl, {
+            method: request.method,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+                ...Object.fromEntries(request.headers),
+            },
+            redirect: 'follow',
+        });
 
         const data = await response.text(); 
 
         return new Response(data, {
             headers: {
-                'Content-Type': response.headers.get('Content-Type') || 'application/json', 
+                'Content-Type': response.headers.get('Content-Type') || 'text/html',
                 'Access-Control-Allow-Origin': '*',
+                'Cache-Control': 'no-cache',
             },
             status: response.status,
         });
