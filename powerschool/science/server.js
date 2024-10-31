@@ -1,29 +1,24 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-const app = express();
-const PORT = 3000;
+export async function onRequest(context) {
+    const { request } = context;
+    const url = new URL(request.url);
+    const targetUrl = url.searchParams.get('url');
 
-app.use(cors()); 
-app.use(express.json());
-
-// Proxy endpoint
-app.get('/proxy', async (req, res) => {
-    const { url } = req.query;
-
-    if (!url) {
-        return res.status(400).json({ error: 'URL parameter is required' });
+    if (!targetUrl) {
+        return new Response('URL parameter is required', { status: 400 });
     }
 
     try {
-        const response = await axios.get(url);
-        res.json(response.data);
-    } catch (error) {
-        console.error('Error fetching data:', error.message); 
-        res.status(500).json({ error: 'Failed to fetch data' });
-    }
-});
+        const response = await fetch(targetUrl);
+        const data = await response.text();
 
-app.listen(PORT, () => {
-    console.log(`Proxy server is running on http://localhost:${PORT}`);
-});
+        return new Response(data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*', 
+            },
+            status: response.status,
+        });
+    } catch (error) {
+        return new Response('Failed to fetch data', { status: 500 });
+    }
+}
