@@ -27,11 +27,16 @@ const server = http.createServer((req, res) => {
                 method: 'GET',
                 headers: {
                     host: url.parse(targetUrl).host,
+                    'User-Agent': 'Mozilla/5.0', 
                 },
             };
 
             const proxyRequest = protocol.request(targetUrl, options, (proxyResponse) => {
-                res.writeHead(proxyResponse.statusCode, proxyResponse.headers);
+               
+                res.writeHead(proxyResponse.statusCode, {
+                    ...proxyResponse.headers,
+                    'Access-Control-Allow-Origin': '*', 
+                });
                 proxyResponse.pipe(res, { end: true });
             });
 
