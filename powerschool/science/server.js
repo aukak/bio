@@ -1,13 +1,13 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-});
+app.use(cors()); 
+app.use(express.json());
 
+// Proxy endpoint
 app.get('/proxy', async (req, res) => {
     const { url } = req.query;
 
@@ -19,6 +19,7 @@ app.get('/proxy', async (req, res) => {
         const response = await axios.get(url);
         res.json(response.data);
     } catch (error) {
+        console.error('Error fetching data:', error.message); 
         res.status(500).json({ error: 'Failed to fetch data' });
     }
 });
