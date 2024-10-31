@@ -15,6 +15,7 @@ document.getElementById("fetchButton").addEventListener("click", async function(
         if (!response.ok) {
             throw new Error('Failed to fetch data from the proxy.');
         }
+
         const data = await response.text(); 
         resultDiv.textContent = data; 
         resultDiv.classList.remove("hidden");
