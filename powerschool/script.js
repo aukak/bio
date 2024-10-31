@@ -1,9 +1,20 @@
-document.getElementById('loadVideo').addEventListener('click', function() {
+document.getElementById('loadVideo').addEventListener('click', async function() {
     const videoUrl = document.getElementById('videoUrl').value;
     const videoId = extractVideoId(videoUrl);
     if (videoId) {
-        const videoPlayer = document.getElementById('videoPlayer');
-        videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        try {
+            const response = await fetch(`/proxy?url=https://www.youtube.com/watch?v=${videoId}`);
+            if (response.ok) {
+                const blob = await response.blob();
+                const videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.src = URL.createObjectURL(blob);
+            } else {
+                alert('Error loading video');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error loading video');
+        }
     } else {
         alert('Invalid YouTube URL');
     }
