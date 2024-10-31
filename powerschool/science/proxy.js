@@ -4,10 +4,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); 
-app.use(express.json());
+app.use(cors());
+app.use(express.static('public'));
 
-// Proxy endpoint
 app.get('/proxy', async (req, res) => {
     const { url } = req.query;
 
@@ -21,8 +20,8 @@ app.get('/proxy', async (req, res) => {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
             },
         });
-        
-        res.set(response.headers); 
+
+        res.set(response.headers);
         res.send(response.data);
     } catch (error) {
         console.error('Error fetching data:', error.message);
