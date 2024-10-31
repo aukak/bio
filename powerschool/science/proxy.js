@@ -1,34 +1,54 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-const app = express();
+const http = require('http');
+const https = require('https');
+const url = require('url');
+
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.static('public'));
+const server = http.createServer((req, res) => {
+    if (req.method === 'POST' && req.url === '/proxy') {
+        let body = '';
 
-app.get('/proxy', async (req, res) => {
-    const { url } = req.query;
-
-    if (!url) {
-        return res.status(400).json({ error: 'URL parameter is required' });
-    }
-
-    try {
-        const response = await axios.get(url, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-            },
+        req.on('data', chunk => {
+            body += chunk.toString();
         });
 
-        res.set(response.headers);
-        res.send(response.data);
-    } catch (error) {
-        console.error('Error fetching data:', error.message);
-        res.status(500).json({ error: 'Failed to fetch data' });
+        req.on('end', () => {
+            const targetUrl = body.trim();
+
+            if (!targetUrl) {
+                res.writeHead(400, { 'Content-Type': 'text/plain' });
+                res.end('URL parameter is required');
+                return;
+            }
+
+            const protocol = targetUrl.startsWith('https') ? https : http;
+
+            const options = {
+                method: 'GET',
+                headers: {
+                    host: url.parse(targetUrl).host,
+                },
+            };
+
+            const proxyRequest = protocol.request(targetUrl, options, (proxyResponse) => {
+                res.writeHead(proxyResponse.statusCode, proxyResponse.headers);
+                proxyResponse.pipe(res, { end: true });
+            });
+
+            proxyRequest.on('error', (err) => {
+                console.error('Proxy error:', err.message);
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Proxy error');
+            });
+
+            proxyRequest.end();
+        });
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not Found');
     }
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Proxy server is running on http://localhost:${PORT}`);
 });
