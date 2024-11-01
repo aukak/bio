@@ -4,25 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>YouTube Downloader</title>
+    <title>Powerschool | Spanish</title>
 </head>
 <body>
-
-    <div id="loading">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading...</div>
+    <div class="container">
+        <h1>YouTube Video Downloader</h1>
+        <input type="text" id="url" placeholder="Enter YouTube Video URL" />
+        <button id="downloadBtn">Download</button>
+        <div id="result"></div>
     </div>
-
-    <div id="content" style="display: none;">
-        <h1>YouTube Downloader</h1>
-        <input type="text" id="videoUrl" placeholder="Enter YouTube URL">
-        <button onclick="download('mp4')">Download MP4</button>
-        <button onclick="download('mp3')">Download MP3</button>
-        <iframe id="videoFrame" title="YouTube Video"></iframe>
-    </div>
-
-    <footer>Download YouTube videos as MP3 or MP4 easily.</footer>
     <script src="script.js"></script>
-
 </body>
 </html>
