@@ -3,25 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="image.png"/>
-    <title>Powerschool</title>
+    <title>YouTube Video Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <div id="loading">
-        <div class="spinner"></div>
-        <div class="loading-text">Loading...</div>
+    <h1>YouTube Video Downloader</h1>
+    <div class="form-container">
+        <form action="/download" method="POST">
+            <input type="text" name="url" placeholder="Enter YouTube URL" required />
+            <input type="submit" value="Download Video" />
+        </form>
     </div>
-    <div id="content">
-        <h1>YouTube Proxy</h1>
-        <input type="text" id="videoUrl" placeholder="Enter YouTube URL">
-        <button id="loadVideo">Load Video</button>
-        <video id="videoPlayer" width="560" height="315" controls></video>
-        <footer>
-            <p>&copy; 2024 Learn Science. All rights reserved.</p>
-        </footer>
-    </div>
-    <script src="script.js"></script>
 </body>
 </html>
