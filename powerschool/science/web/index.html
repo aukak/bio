@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>anony</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <main class="main-container">
+     <a href="/index.html"><img src="/assets/logo.png" alt="Anony Logo" class="logo"></a>
+      <h1>search</h1>
+      <p class="subtext">use our modernized web proxy to instantly search the web, while staying secure</p>
+      <form id="uv-form">
+        <input id="uv-search-engine" value="https://www.google.com/search?q=%s" type="hidden"/>
+        <input id="uv-address" type="text" placeholder="search google or type a url" class="form__input"/>
+      </form>
+      <div>
+        <label for="search-engine">choose a search engine:</label>
+        <select id="search-engine" onchange="updateSearchEngine()">
+          <option value="https://www.google.com/search?q=%s">google</option>
+          <option value="https://duckduckgo.com/?q=%s">duckduckgo</option>
+          <option value="https://search.yahoo.com/search?p=%s">yahoo</option>
+        </select>
+      </div>
+      <div class="desc left-margin">
+        <p id="uv-error"></p>
+        <pre id="uv-error-code"></pre>
+      </div>
+    </main>
+    <script>
+      function updateSearchEngine() {
+        const searchEngine = document.getElementById('search-engine').value;
+        document.getElementById('uv-search-engine').value = searchEngine;
+      }
+    </script>
+    <script src="uv/uv.bundle.js" defer></script>
+    <script src="uv/uv.config.js" defer></script>
+    <script src="register-sw.js" defer></script>
+    <script src="search.js" defer></script>
+    <script src="index.js" defer></script>
+  </body>
+</html>
